@@ -4,22 +4,36 @@
     <title>Space Shuttle Shooter</title>
 </head>
 <body>
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <canvas id="gameCanvas" width="600" height="600"></canvas>
 
 <script>
-    var canvas, canvasContext;
+    var canvas, canvasContext, imgAssest;
     
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');    
+    imgAssests = loadImgAssests();
+    
     
         setInterval(mainLoop, 1000 / 50);
     }
 
 function mainLoop(){
-    colorRect(0,0,canvas.width,canvas.height, 'black') // background
-    
+    colorRect(0,0,canvas.width,canvas.height, 'black'); // background
+    drawingImages(img.bg, 0, 0, canvas.width, canvas.height);
 }
+    
+function loadImgAssests(){
+    img = {};
+    img.bg = new Image();
+    img.bg.src = 'Images/froggerCrossing.png'
+    
+    return img;
+}
+    
+function drawingImages(image, dx, dy, dWidth, dHeight){
+    canvasContext.drawImage(image, dx, dy, dWidth, dHeight)
+}    
     
 function colorRect(x,y,w,h,color){
     canvasContext.fillStyle = color;
