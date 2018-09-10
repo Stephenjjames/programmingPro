@@ -1,18 +1,18 @@
 <!doctype html>
 <html>
 <head>
-    <title>Space Shuttle Shooter</title>
+    <title>Frogger</title>
 </head>
 <body>
     <canvas id="gameCanvas" width="600" height="600"></canvas>
 
 <script>
-    var canvas, canvasContext, imgAssest;
+    var canvas, canvasContext, imgAssets;
     
 window.onload = function() {
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');    
-    imgAssests = loadImgAssests();
+    imgAssets = loadImgAssets();
     
     
         setInterval(mainLoop, 1000 / 50);
@@ -21,15 +21,19 @@ window.onload = function() {
 function mainLoop(){
     colorRect(0,0,canvas.width,canvas.height, 'black'); // background
     drawingImages(img.bg, 0, 0, canvas.width, canvas.height);
+    drawingImages(img.player, 0, 0, 60, 60);
 }
     
-function loadImgAssests(){
+function loadImgAssets(){
     img = {};
     img.bg = new Image();
     img.bg.src = 'Images/froggerCrossing.png'
+    img.player = new Image();
+    img.player.src = 'Images/frogger.png'
     
     return img;
 }
+
     
 function drawingImages(image, dx, dy, dWidth, dHeight){
     canvasContext.drawImage(image, dx, dy, dWidth, dHeight)
