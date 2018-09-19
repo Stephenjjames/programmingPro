@@ -28,13 +28,13 @@
         var frogXspeed = 5;
         const FROG_SIZE = 40;
 
-//        var laneRandom = 0;
+        //        var laneRandom = 0;
         var carXpos = 0;
         var carYpos = 0;
         var carYspeed = 5;
         var carXspeed = 5;
         const CAR_SIZE = 60;
-       
+
         var carStart = true;
 
 
@@ -64,6 +64,7 @@
             }
             frogMove();
             carMove();
+            collision();
         }
 
 
@@ -101,10 +102,8 @@
                 rightArrowKeyPressed = false;
             }
         }
-        
-        function randLane() {
-           
-        }
+
+    
 
 
         function frogMove() {
@@ -133,13 +132,13 @@
             var lanePos = 0;
             var laneHeight = 72;
             var grassSpace = 87;
-            
-            if(carStart){
-                lanePos = Math.floor(Math.random()* 5 + 0);
+
+            if (carStart) {
+                lanePos = Math.floor(Math.random() * 5 + 0);
                 carYpos = grassSpace + laneHeight * lanePos;
                 carStart = false;
             }
-            
+
             carXpos = carXpos + carXspeed;
 
             if (carXpos > canvas.width) {
@@ -147,6 +146,15 @@
                 carStart = true;
             }
 
+        }
+
+        function collision() {
+            if (frogYpos + FROG_SIZE > carYpos && frogYpos < carYpos + CAR_SIZE 
+                && frogXpos + FROG_SIZE > carXpos && frogXpos < carXpos + CAR_SIZE
+               ) {
+                starting = true;
+                
+            }
         }
 
 
