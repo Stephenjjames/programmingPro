@@ -26,7 +26,17 @@
         var frogYpos = 0;
         var frogYspeed = 5;
         var frogXspeed = 5;
-        const FROG_SIZE = 60;
+        const FROG_SIZE = 40;
+
+//        var laneRandom = 0;
+        var carXpos = 0;
+        var carYpos = 0;
+        var carYspeed = 5;
+        var carXspeed = 5;
+        const CAR_SIZE = 60;
+       
+        var carStart = true;
+
 
         const UP_ARROW_KEY = 38;
         const DOWN_ARROW_KEY = 40;
@@ -44,6 +54,7 @@
             colorRect(0, 0, canvas.width, canvas.height, 'black'); // background
             drawingImages(img.bg, 0, 0, canvas.width, canvas.height);
             drawingImages(img.player, frogXpos, frogYpos, FROG_SIZE, FROG_SIZE);
+            drawingImages(img.obstacle, carXpos, carYpos, CAR_SIZE, CAR_SIZE);
 
 
             if (starting) {
@@ -52,6 +63,7 @@
 
             }
             frogMove();
+            carMove();
         }
 
 
@@ -89,6 +101,10 @@
                 rightArrowKeyPressed = false;
             }
         }
+        
+        function randLane() {
+           
+        }
 
 
         function frogMove() {
@@ -104,13 +120,33 @@
                 frogYpos += frogYspeed;
             }
 
-            if (rightArrowKeyPressed) {
+            if (rightArrowKeyPressed && frogXpos < canvas.width - FROG_SIZE) {
                 frogXpos += frogXspeed;
             }
 
-            if (leftArrowKeyPressed) {
+            if (leftArrowKeyPressed && frogXpos > 0) {
                 frogXpos -= frogXspeed;
             }
+        }
+
+        function carMove() {
+            var lanePos = 0;
+            var laneHeight = 72;
+            var grassSpace = 87;
+            
+            if(carStart){
+                lanePos = Math.floor(Math.random()* 5 + 0);
+                carYpos = grassSpace + laneHeight * lanePos;
+                carStart = false;
+            }
+            
+            carXpos = carXpos + carXspeed;
+
+            if (carXpos > canvas.width) {
+                carXpos = 0 - CAR_SIZE;
+                carStart = true;
+            }
+
         }
 
 
@@ -120,6 +156,8 @@
             img.bg.src = 'Images/froggerCrossing.png'
             img.player = new Image();
             img.player.src = 'Images/frogger.png'
+            img.obstacle = new Image();
+            img.obstacle.src = 'Images/obstacle.png'
 
             return img;
         }
